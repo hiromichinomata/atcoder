@@ -9,3 +9,4 @@
 * abc081b: Shift only
 * abc087b: Coins
 * abc083b: Some Sums
+* abc088b: Card Game for Two
