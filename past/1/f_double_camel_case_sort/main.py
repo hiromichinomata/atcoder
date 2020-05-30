@@ -5,20 +5,20 @@ import sys
 s = input().strip()
 
 words = []
-tmp = ""
-mode = "start"
+tmp = []
+mode = "s"
 
 for i in range(len(s)):
   if s[i].isupper():
-    if mode == "start":
-      tmp = s[i]
-      mode = "middle"
+    if mode == "s":
+      tmp = [s[i]]
+      mode = "m"
     else:
-      tmp += s[i]
-      mode = "start"
-      words.append(tmp)
+      tmp.append(s[i])
+      mode = "s"
+      words.append(''.join(tmp))
   else:
-    tmp += s[i]
+    tmp.append(s[i])
 
 sorted_words = sorted(words, key=lambda x:x.lower())
-print("".join(sorted_words))
+print(''.join(sorted_words))
