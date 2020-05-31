@@ -4,8 +4,9 @@ import sys
 input = sys.stdin.readline
 
 def main():
-  a, b = list(map(float, input().strip().split()))
-  result = int(a * b)
+  a, b = input().strip().split()
+  a, b = int(a), round(float(b)*100)
+  result = a * b //100
   print(result)
 
 main()
