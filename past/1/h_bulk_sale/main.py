@@ -2,6 +2,7 @@
 
 import copy
 import sys
+input = sys.stdin.readline
 
 n = int(input().strip())
 c = list(map(int, input().strip().split()))
