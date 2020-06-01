@@ -6,23 +6,17 @@ from collections import defaultdict
 from collections import deque
 
 def add_last(s, c, x):
-  s.append((c,x))
+  for i in range(x):
+    s.append(c)
 
 def print_del(s, d):
   count_dict = defaultdict(int)
-
-  while len(s) > 0 and d > 0:
-    v = s.popleft()
-    c, x = v
-
-    if x > d:
-      count_dict[c] += d
-      x -= d
-      d -= d
-      s.appendleft((c, x))
+  for i in range(d):
+    if len(s) > 0:
+      v = s.popleft()
+      count_dict[v] += 1
     else:
-      count_dict[c] += x
-      d -= x
+      break
 
   result = 0
   for key in count_dict.keys():
