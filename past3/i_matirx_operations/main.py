@@ -18,14 +18,6 @@ def replace_column(arr, a, b):
     arr[i][a] = ab
     arr[i][b] = aa
 
-def transpose(arr):
-  arr_new = copy.deepcopy(arr)
-  for i in range(len(arr)):
-    for j in range(len(arr)):
-      arr_new[i][j] = arr[j][i]
-
-  return arr_new
-
 def print_matrix(arr, a, b):
   print(arr[a][b])
 
@@ -33,19 +25,30 @@ def main():
   n = int(input().strip())
   q = int(input().strip())
   a = defaultdict(list)
+
   for i in range(n):
     for j in range(n):
       a[i].append(n*i+j)
 
+  transpose = False
   for i in range(q):
     query = list(map(int, input().strip().split()))
     if query[0] == 1:
-      replace_row(a, query[1]-1, query[2]-1)
+      if transpose:
+        replace_column(a, query[1]-1, query[2]-1)
+      else:
+        replace_row(a, query[1]-1, query[2]-1)
     elif query[0] == 2:
-      replace_column(a, query[1]-1, query[2]-1)
+      if transpose:
+        replace_row(a, query[1]-1, query[2]-1)
+      else:
+        replace_column(a, query[1]-1, query[2]-1)
     elif query[0] == 3:
-      a = transpose(a)
+      transpose = not transpose
     elif query[0] == 4:
-      print_matrix(a, query[1]-1, query[2]-1)
+      if transpose:
+        print_matrix(a, query[2]-1, query[1]-1)
+      else:
+        print_matrix(a, query[1]-1, query[2]-1)
 
 main()
