@@ -8,18 +8,20 @@ def main():
   n = int(input().strip())
   a = []
   for i in range(n):
-    a.append(list(input().strip()))
+    a.append(set(list(input().strip())))
 
-  b = defaultdict(list)
-  for i in range(n):
-    for j in range(n):
-      b[i].append(a[j][i])
-
-  for i in range(n):
-    if b[i] == b[i][::-1]:
-      print(''.join(b[i]))
+  s = []
+  for i in range(n//2):
+    common = list(a[i] & a[-i-1])
+    if len(common) > 0:
+      s.append(common[0])
+    else:
+      print(-1)
       sys.exit()
 
-  print(-1)
+  if n % 2 == 0:
+    print(''.join(s + s[::-1]))
+  else:
+    print(''.join(s + [list(a[n//2])[0]] + s[::-1]))
 
 main()
