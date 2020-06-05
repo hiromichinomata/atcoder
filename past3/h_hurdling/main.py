@@ -44,9 +44,23 @@ def main():
       elif j == 2:
         pos = i+2
         cost = t[0] + t[1]
+        if pos > l:
+          pos = l
+          cost = (t[0] + t[1])/2
       else:
         pos = i+4
         cost = t[0] + t[1] * 3
+
+        if i+1 == l:
+          pos = l
+          cost = (t[0] + t[1])/2
+
+        if i+2 == l:
+          pos = l
+          cost = (t[0] + t[1] * 3)/2
+
+        if i+3 == l:
+          cost = (t[0] + t[1] * 5)/2
 
       if board[i] == 1:
         cost += t[2]
@@ -56,6 +70,6 @@ def main():
   dist = dijkstra(l+5, g, start)
   end = l
   result = dist[end]
-  print(result)
+  print(round(result))
 
 main()
