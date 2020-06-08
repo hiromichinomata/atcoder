@@ -17,23 +17,18 @@ def replace_row(convert_row, a, b):
   convert_row[a] = tmp_b
   convert_row[b] = tmp_a
 
-def print_matrix(arr, a, b):
-  print(arr[a][b])
+def print_matrix(n, a, b):
+  print(n*a+b)
 
 def main():
   n = int(input().strip())
   q = int(input().strip())
-  a = defaultdict(list)
   convert_column = []
   for i in range(n):
     convert_column.append(i)
   convert_row = []
   for i in range(n):
     convert_row.append(i)
-
-  for i in range(n):
-    for j in range(n):
-      a[i].append(n*i+j)
 
   transpose = False
   for i in range(q):
@@ -52,8 +47,8 @@ def main():
       transpose = not transpose
     elif query[0] == 4:
       if transpose:
-        print_matrix(a, convert_row[query[2]-1], convert_column[query[1]-1])
+        print_matrix(n, convert_row[query[2]-1], convert_column[query[1]-1])
       else:
-        print_matrix(a, convert_row[query[1]-1], convert_column[query[2]-1])
+        print_matrix(n, convert_row[query[1]-1], convert_column[query[2]-1])
 
 main()
