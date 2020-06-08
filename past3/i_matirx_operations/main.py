@@ -11,11 +11,11 @@ def replace_column(convert_column, a, b):
   convert_column[a] = tmp_b
   convert_column[b] = tmp_a
 
-def replace_row(arr, a, b):
-  aa = arr[a]
-  ab = arr[b]
-  arr[a] = ab
-  arr[b] = aa
+def replace_row(convert_row, a, b):
+  tmp_a = convert_row[a]
+  tmp_b = convert_row[b]
+  convert_row[a] = tmp_b
+  convert_row[b] = tmp_a
 
 def print_matrix(arr, a, b):
   print(arr[a][b])
@@ -27,6 +27,9 @@ def main():
   convert_column = []
   for i in range(n):
     convert_column.append(i)
+  convert_row = []
+  for i in range(n):
+    convert_row.append(i)
 
   for i in range(n):
     for j in range(n):
@@ -39,18 +42,18 @@ def main():
       if transpose:
         replace_column(convert_column, query[1]-1, query[2]-1)
       else:
-        replace_row(a, query[1]-1, query[2]-1)
+        replace_row(convert_row, query[1]-1, query[2]-1)
     elif query[0] == 2:
       if transpose:
-        replace_row(a, query[1]-1, query[2]-1)
+        replace_row(convert_row, query[1]-1, query[2]-1)
       else:
         replace_column(convert_column, query[1]-1, query[2]-1)
     elif query[0] == 3:
       transpose = not transpose
     elif query[0] == 4:
       if transpose:
-        print_matrix(a, query[2]-1, convert_column[query[1]-1])
+        print_matrix(a, convert_row[query[2]-1], convert_column[query[1]-1])
       else:
-        print_matrix(a, query[1]-1, convert_column[query[2]-1])
+        print_matrix(a, convert_row[query[1]-1], convert_column[query[2]-1])
 
 main()
