@@ -38,10 +38,10 @@ def main():
   g = defaultdict(list)
   for i in range(l):
     for j in range(3):
-      if j == 1:
+      if j == 0:
         pos = i+1
         cost = t[0]
-      elif j == 2:
+      elif j == 1:
         pos = i+2
         cost = t[0] + t[1]
         if pos > l:
@@ -51,25 +51,18 @@ def main():
         pos = i+4
         cost = t[0] + t[1] * 3
 
-        if i+1 == l:
+        if pos > l:
           pos = l
-          cost = (t[0] + t[1])/2
-
-        if i+2 == l:
-          pos = l
-          cost = (t[0] + t[1] * 3)/2
-
-        if i+3 == l:
-          cost = (t[0] + t[1] * 5)/2
+          cost = t[0]*0.5 + t[1]*0.5 + t[1]*(l-i-1)
 
       if board[i] == 1:
         cost += t[2]
-      g[i].append((pos, cost))
+      g[i].append((pos, round(cost)))
 
   start = 0
   dist = dijkstra(l+5, g, start)
   end = l
   result = dist[end]
-  print(round(result))
+  print(result)
 
 main()
