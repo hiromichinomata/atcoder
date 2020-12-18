@@ -2,24 +2,25 @@
 
 import sys
 input = sys.stdin.readline
+from atcoder.segtree import SegTree
+
+def xor(a, b):
+  return a^b
 
 def main():
   n, q = list(map(int, input().strip().split()))
   a = list(map(int, input().strip().split()))
+
+  segtree = SegTree(xor, -1, a)
+
   for i in range(q):
-    t, x, y = list(map(int, input().strip().split()))
-    x -= 1
+      t, x, y = list(map(int, input().strip().split()))
+      x -= 1
 
-    if t == 1:
-      a[x] = a[x] ^ y
-    else:
-      result = 0
-      for i in range(x, y):
-        if result == 0:
-          result = a[i]
-        else:
-          result ^= a[i]
-
-      print(result)
+      if t == 1:
+        tmp = segtree.get(x)
+        segtree.set(x, tmp^y)
+      else:
+        print(segtree.prod(x, y))
 
 main()

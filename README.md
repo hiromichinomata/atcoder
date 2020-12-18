@@ -1,5 +1,14 @@
 # AtCoder Solutions
 * Start Point
 * AtCoder Beginners Selection
-* PAST 1st
-* AtCoder Beginner Contest 169
+* PAST 1-3
+* AtCoder Beginner Contests
+
+etc...
+
+# AtCoder Library
+
+```python
+pip install git+https://github.com/not522/ac-library-python
+python -m atcoder main.py -o submit.py
+```
