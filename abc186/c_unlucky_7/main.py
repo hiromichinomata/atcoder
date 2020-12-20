@@ -2,7 +2,6 @@
 
 import sys
 input = sys.stdin.readline
-import math
 
 def main():
   n = int(input().strip())

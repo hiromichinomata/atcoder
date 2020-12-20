@@ -2,7 +2,6 @@
 
 import sys
 input = sys.stdin.readline
-from collections import defaultdict
 
 def main():
   h, w = list(map(int, input().strip().split()))
