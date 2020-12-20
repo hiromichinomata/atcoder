@@ -1,4 +1,5 @@
-#!/bin/python3
+# pypy3
+# not passed by python3
 
 import sys
 input = sys.stdin.readline
