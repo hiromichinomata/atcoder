@@ -1,10 +1,11 @@
 #!/bin/python3
+# ref
+# https://evolite.hatenablog.com/entry/20201220/1608418755
 
 import sys
 input = sys.stdin.readline
 from atcoder.fenwicktree import FenwickTree
 
-# https://evolite.hatenablog.com/entry/20201220/1608418755
 h, w, m = map(int, input().split())
 row, col = [w] * h, [h] * w
 obs = [[] for _ in range(h)]
@@ -19,6 +20,6 @@ for j in range(row[0]):
     tree.add(j, 1)
 for i in range(col[0]):
     for j in obs[i]:
-        tree.add(j, -tree[j])
+        tree.add(j, -tree.sum(j, j+1))
     ans -= tree.sum(0, row[i])
 print(ans)
