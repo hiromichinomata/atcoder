@@ -49,25 +49,33 @@ FenwickTree = atcoder.fenwicktree.FenwickTree
 #!/bin/python3
 # ref
 # https://evolite.hatenablog.com/entry/20201220/1608418755
+# pypy3
 
 import sys
 input = sys.stdin.readline
 # from atcoder.fenwicktree import FenwickTree
 
-h, w, m = map(int, input().split())
-row, col = [w] * h, [h] * w
-obs = [[] for _ in range(h)]
-for _ in range(m):
-    i, j = map(lambda x: int(x) - 1, input().split())
-    row[i] = min(row[i], j)
-    col[j] = min(col[j], i)
-    obs[i].append(j)
-ans = sum(row[: col[0]]) + sum(col[: row[0]])
-tree = FenwickTree(w)
-for j in range(row[0]):
-    tree.add(j, 1)
-for i in range(col[0]):
-    for j in obs[i]:
-        tree.add(j, -tree.sum(j, j+1))
-    ans -= tree.sum(0, row[i])
-print(ans)
+def main():
+  h, w, m = list(map(int, input().strip().split()))
+  x2y = [w] * h
+  y2x = [h] * w
+  obs_y2x = [[] for _ in range(h)]
+  for i in range(m):
+    xt, yt = list(map(int, input().strip().split()))
+    xt -= 1
+    yt -= 1
+    x2y[xt] = min(x2y[xt], yt)
+    y2x[yt] = min(y2x[yt], xt)
+    obs_y2x[xt].append(yt)
+
+  result = sum(x2y[: y2x[0]]) + sum(y2x[: x2y[0]])
+  tree = FenwickTree(w)
+  for j in range(x2y[0]):
+      tree.add(j, 1)
+  for i in range(y2x[0]):
+      for j in obs_y2x[i]:
+          tree.add(j, -tree.sum(j, j+1))
+      result -= tree.sum(0, x2y[i])
+  print(result)
+
+main()
