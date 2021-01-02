@@ -9,73 +9,97 @@ __version__ = '0.0.1'
 atcoder = types.ModuleType('atcoder')
 exec(_atcoder_code, atcoder.__dict__)
 
-_atcoder_fenwicktree_code = """
+_atcoder_dsu_code = """
 import typing
 
 
-class FenwickTree:
-    '''Reference: https://en.wikipedia.org/wiki/Fenwick_tree'''
+class DSU:
+    '''
+    Implement (union by size) + (path halving)
+
+    Reference:
+    Zvi Galil and Giuseppe F. Italiano,
+    Data structures and algorithms for disjoint set union problems
+    '''
 
     def __init__(self, n: int = 0) -> None:
         self._n = n
-        self.data = [0] * n
+        self.parent_or_size = [-1] * n
 
-    def add(self, p: int, x: typing.Any) -> None:
-        assert 0 <= p < self._n
+    def merge(self, a: int, b: int) -> int:
+        assert 0 <= a < self._n
+        assert 0 <= b < self._n
 
-        p += 1
-        while p <= self._n:
-            self.data[p - 1] += x
-            p += p & -p
+        x = self.leader(a)
+        y = self.leader(b)
 
-    def sum(self, left: int, right: int) -> typing.Any:
-        assert 0 <= left <= right <= self._n
+        if x == y:
+            return x
 
-        return self._sum(right) - self._sum(left)
+        if -self.parent_or_size[x] < -self.parent_or_size[y]:
+            x, y = y, x
 
-    def _sum(self, r: int) -> typing.Any:
-        s = 0
-        while r > 0:
-            s += self.data[r - 1]
-            r -= r & -r
+        self.parent_or_size[x] += self.parent_or_size[y]
+        self.parent_or_size[y] = x
 
-        return s
+        return x
+
+    def same(self, a: int, b: int) -> bool:
+        assert 0 <= a < self._n
+        assert 0 <= b < self._n
+
+        return self.leader(a) == self.leader(b)
+
+    def leader(self, a: int) -> int:
+        assert 0 <= a < self._n
+
+        parent = self.parent_or_size[a]
+        while parent >= 0:
+            if self.parent_or_size[parent] < 0:
+                return parent
+            self.parent_or_size[a], a, parent = (
+                self.parent_or_size[parent],
+                self.parent_or_size[parent],
+                self.parent_or_size[self.parent_or_size[parent]]
+            )
+
+        return a
+
+    def size(self, a: int) -> int:
+        assert 0 <= a < self._n
+
+        return -self.parent_or_size[self.leader(a)]
+
+    def groups(self) -> typing.List[typing.List[int]]:
+        leader_buf = [self.leader(i) for i in range(self._n)]
+
+        result: typing.List[typing.List[int]] = [[] for _ in range(self._n)]
+        for i in range(self._n):
+            result[leader_buf[i]].append(i)
+
+        return list(filter(lambda r: r, result))
 """
 
-atcoder.fenwicktree = types.ModuleType('atcoder.fenwicktree')
-exec(_atcoder_fenwicktree_code, atcoder.fenwicktree.__dict__)
-FenwickTree = atcoder.fenwicktree.FenwickTree
+atcoder.dsu = types.ModuleType('atcoder.dsu')
+exec(_atcoder_dsu_code, atcoder.dsu.__dict__)
+DSU = atcoder.dsu.DSU
 
 #!/bin/python3
-# ref
-# https://evolite.hatenablog.com/entry/20201220/1608418755
-# pypy3
 
 import sys
 input = sys.stdin.readline
-# from atcoder.fenwicktree import FenwickTree
+# from atcoder.dsu import DSU
 
 def main():
-  h, w, m = list(map(int, input().strip().split()))
-  x2y = [w] * h
-  y2x = [h] * w
-  obs_y2x = [[] for _ in range(h)]
+  n, m = list(map(int, input().strip().split()))
+  tree = DSU(n)
   for i in range(m):
-    xt, yt = list(map(int, input().strip().split()))
-    xt -= 1
-    yt -= 1
-    x2y[xt] = min(x2y[xt], yt)
-    y2x[yt] = min(y2x[yt], xt)
-    obs_y2x[xt].append(yt)
+    a, b = list(map(int, input().strip().split()))
+    a = a - 1
+    b = b - 1
+    if a >= b:
+      tree.merge(a, b)
 
-  result = sum(x2y[: y2x[0]]) + sum(y2x[: x2y[0]])
-  tree = FenwickTree(w)
-  for j in range(x2y[0]):
-      tree.add(j, 1)
-  for i in range(y2x[0]):
-      for j in obs_y2x[i]:
-          tree.add(j, -tree.sum(j, j+1))
-      result -= tree.sum(0, x2y[i])
-  print(result)
+  print(len(tree.groups()))
 
 main()
