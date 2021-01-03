@@ -15,7 +15,7 @@ def main():
 
   aoki_score = sum(aoki)
   takahashi_score = 0
-  pairs = sorted(pairs, key=lambda a: a[0] + a[1], reverse=True)
+  pairs = sorted(pairs, key=lambda a: 2 * a[0] + a[1], reverse=True)
   count = 0
   for i in range(n):
     aoki, takahashi = pairs[i]
