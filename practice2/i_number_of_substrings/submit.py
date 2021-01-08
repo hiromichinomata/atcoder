@@ -273,16 +273,22 @@ def z_algorithm(s: typing.Union[str, typing.List[int]]) -> typing.List[int]:
 
 atcoder.string = types.ModuleType('atcoder.string')
 exec(_atcoder_string_code, atcoder.string.__dict__)
-z_algorithm = atcoder.string.z_algorithm
+suffix_array = atcoder.string.suffix_array
+
+lcp_array = atcoder.string.lcp_array
 
 #!/bin/python3
 
 import sys
 input = sys.stdin.readline
-# from atcoder.string import z_algorithm
+# from atcoder.string import suffix_array ,lcp_array
 
 def main():
   s = list(map(str, input().strip().split()))[0]
-  print(z_algorithm(s))
+  sa = suffix_array(s)
+  result = len(sa) * (len(sa) + 1)//2
+  for i in lcp_array(s, sa):
+    result -= i
+  print(result)
 
 main()
