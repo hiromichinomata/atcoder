@@ -5,7 +5,9 @@ input = sys.stdin.readline
 from decimal import Decimal
 
 def main():
-  n = int(input().strip())
+  n, cost = list(map(int, input().strip().split()))
+  for _ in range(n):
+    a, b, c_prime = list(map(int, input().strip().split()))
   aoki = []
   pairs = []
   for _ in range(n):
