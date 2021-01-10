@@ -20,6 +20,18 @@ def main():
     tree.merge(x[i], y[i])
 
   results = []
-  print(tree.groups())
+  profits = [-float('inf')] * len(tree.groups())
+  index = -1
+  for l in tree.groups():
+    index += 1
+    if len(l) <= 1:
+      continue
+    edges = sorted(l)
+    min_value = 10**9
+    for i in range(len(edges)):
+      profits[index] = max(profits[index], a[edges[i]] - min_value)
+      min_value = min(min_value, a[edges[i]])
+
+  print(max(profits))
 
 main()
