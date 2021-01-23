@@ -8,7 +8,7 @@ def main():
   for i in range(n):
     v, p = list(map(int, input().strip().split()))
     x -= v/100.0*p
-    if int(x) < 0:
+    if x < 0:
       print(i+1)
       sys.exit()
 
