@@ -2,13 +2,15 @@
 
 import sys
 input = sys.stdin.readline
+from decimal import Decimal
 
 def main():
   n, x = list(map(int, input().strip().split()))
+  x = Decimal(x)
   for i in range(n):
     v, p = list(map(int, input().strip().split()))
-    x -= v/100.0*p
-    if int(x) < 0:
+    x -= Decimal(v) / Decimal(100) * Decimal(p)
+    if x < Decimal(0):
       print(i+1)
       sys.exit()
 
