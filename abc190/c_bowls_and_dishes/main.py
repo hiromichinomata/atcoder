@@ -1,5 +1,4 @@
 #!/bin/python3
-# pypy3
 
 import sys
 input = sys.stdin.readline
@@ -24,5 +23,18 @@ def main():
     dt -= 1
     c.append(ct)
     d.append(dt)
+
+  dishes = [0] * n
+  for i in range(k):
+    if dishes[c[i]] == 0:
+      dishes[c[i]] += 1
+    else:
+      dishes[d[i]] += 1
+
+  result = 0
+  for i in range(m):
+    if dishes[a[i]] > 0 and dishes[b[i]] > 0:
+      result += 1
+  print(result)
 
 main()
