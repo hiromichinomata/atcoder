@@ -25,16 +25,25 @@ def main():
     d.append(dt)
 
   dishes = [0] * n
+  candidates = [dishes]
   for i in range(k):
-    if dishes[c[i]] == 0:
-      dishes[c[i]] += 1
-    else:
-      dishes[d[i]] += 1
+    new_candidates = []
+    for dishes in candidates:
+      new_dishes = dishes.copy()
+      new_dishes[c[i]] = 1
+      new_candidates.append(new_dishes)
+      new_dishes = dishes.copy()
+      new_dishes[d[i]] = 1
+      new_candidates.append(new_dishes)
+    candidates = new_candidates
 
   result = 0
-  for i in range(m):
-    if dishes[a[i]] > 0 and dishes[b[i]] > 0:
-      result += 1
+  for c in candidates:
+    score = 0
+    for i in range(m):
+      if c[a[i]] > 0 and c[b[i]] > 0:
+        score += 1
+    result = max(result, score)
   print(result)
 
 main()
