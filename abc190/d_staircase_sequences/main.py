@@ -19,14 +19,16 @@ def factorization(n):
 
     return arr
 
-# print(factorization(2020))
-# => [[2, 2], [5, 1], [101, 1]]
-
-
 def main():
   n = list(map(int, input().strip().split()))[0]
-  f = factorization(n)
+  factored = factorization(n)
+  count = 1
+  for f in factored:
+    i, j = f
+    if i == 2:
+        continue
+    count *= (j+1)
 
-  print(f)
+  print(count*2)
 
 main()
