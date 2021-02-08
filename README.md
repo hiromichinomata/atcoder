@@ -1,6 +1,5 @@
 # AtCoder Solutions
 * Start Point
-* AtCoder Beginners Selection
 * PAST 1-3
 * AtCoder Beginner Contests
 
