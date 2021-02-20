@@ -3,14 +3,21 @@
 import sys
 input = sys.stdin.readline
 
+def convert(s, n):
+  result = 0
+  s_i = list(reversed([int(char) for char in str(s)]))
+  for i in range(len(s_i)):
+    result += s_i[i] * (n**i)
+  return result
+
 def main():
   x = list(map(str, input().strip().split()))[0]
   m = list(map(int, input().strip().split()))[0]
 
   d = int(sorted([char for char in str(x)], reverse=True)[0])
   result = 0
-  for i in range(d+1, 36):
-    converted = int(x, i)
+  for i in range(d+1, 100):
+    converted = convert(x, i)
     if converted <= m:
       result += 1
 
