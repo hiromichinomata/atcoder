@@ -15,11 +15,20 @@ def main():
   m = list(map(int, input().strip().split()))[0]
 
   d = int(sorted([char for char in str(x)], reverse=True)[0])
-  result = 0
-  for i in range(d+1, 100):
-    converted = convert(x, i)
-    if converted <= m:
-      result += 1
+  if len(x) >= len(str(m)):
+    max_d = 10
+    result = 0
+    for i in range(d+1, max_d):
+      converted = convert(x, i)
+      if converted <= m:
+        result += 1
+  else:
+    max_d = 100
+    result = 0
+    for i in range(d+1, max_d):
+      converted = convert(x, i)
+      if converted <= m:
+        result += 1
 
   print(result)
 
