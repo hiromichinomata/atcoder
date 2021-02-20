@@ -2,6 +2,7 @@
 
 import sys
 input = sys.stdin.readline
+import math
 
 def convert(s, n):
   result = 0
@@ -23,12 +24,13 @@ def main():
       if converted <= m:
         result += 1
   else:
-    max_d = 100
-    result = 0
-    for i in range(d+1, max_d):
+    max_d = math.ceil(m / int(x) * 10)
+    result = 1
+    for i in range(max_d, d, -1):
       converted = convert(x, i)
       if converted <= m:
-        result += 1
+        result = i - d
+        break
 
   print(result)
 
