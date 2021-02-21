@@ -2,10 +2,9 @@
 
 import sys
 input = sys.stdin.readline
-from decimal import Decimal
 
 def main():
-  x, y = list(map(Decimal, input().strip().split()))
+  x, y = list(map(int, input().strip().split()))
   if x == y:
     print(0)
     sys.exit()

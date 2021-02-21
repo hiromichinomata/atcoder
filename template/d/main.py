@@ -2,7 +2,6 @@
 
 import sys
 input = sys.stdin.readline
-from decimal import Decimal
 
 def main():
   n = list(map(int, input().strip().split()))[0]
