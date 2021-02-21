@@ -1,9 +1,9 @@
 # AtCoder Solutions
-* Start Point
-* PAST 1-3
 * AtCoder Beginner Contests
-
-etc...
+* AtCoder Beginner Contests like
+* AtCoder Regular Contests
+* PAST
+* Others
 
 # AtCoder Library
 
