@@ -13,13 +13,11 @@ def main():
   my = (y0 + yo)/2
   x = x0 - mx
   y = y0 - my
-  # r = ( (x0-xo)**2 + (y0-yo)**2 ) ** 0.5 / 2
-  rad = math.pi/n
+  rad = 2 * math.pi/n
   cos = np.cos(rad)
   sin = np.sin(rad)
   rx = (x * cos) -  (y * sin) + mx
   ry = (x * sin) + (y * cos) + my
-  print(rx)
-  print(ry)
+  print(" ".join([str(rx), str(ry)]))
 
 main()
