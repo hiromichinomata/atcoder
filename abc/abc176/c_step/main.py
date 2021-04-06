@@ -1,5 +1,4 @@
 #!/bin/python3
-# pypy3
 
 import sys
 input = sys.stdin.readline
@@ -10,11 +9,11 @@ def main():
 
   result = 0
 
-  for i in range(n):
-    tmp_min = float('inf')
-    for j in range(i, n):
-      tmp_min = min(tmp_min, a[j])
-      result = max(result, tmp_min* (j-i+1))
+  for i in range(1, n):
+    if a[i-1] > a[i]:
+      result += a[i-1] - a[i]
+      a[i] = a[i-1]
+
   print(result)
 
 main()
