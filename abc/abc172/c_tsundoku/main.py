@@ -27,7 +27,7 @@ def main():
 
   result = ci
   cj = 0
-  while ci > 0:
+  while ci >= 0:
     for j in range(cj, m):
       if a[ci] + b[j] > k:
         break
