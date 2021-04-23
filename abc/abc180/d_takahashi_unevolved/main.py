@@ -10,11 +10,11 @@ if sys.platform =='ios':
 def main():
 	x, y, a, b = list(map(int, input().strip().split()))
 	result = 0
-	l = int(math.log(y/x, a))
-	for i in range(1, l+1):
-		tmp = y-1-x*a**i
-		print(i + tmp//b)
-		result = max(result, i + tmp//b)
+
+	while x*a < x+b and x*a < y:
+		x *= a
+		result += 1
+	result += (y-1-x)//b
 		
 	print(result)
 
