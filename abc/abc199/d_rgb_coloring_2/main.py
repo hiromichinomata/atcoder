@@ -10,13 +10,22 @@ def main():
     a, b = list(map(int, input().strip().split()))
     a -= 1
     b -= 1
-    a, b = min(a,b), max(a,b)
     edges[a] += [b]
+    edges[b] += [a]
 
-  print(edges)
-  dp = [0]*n
+  result = 1
+  for i in range(n):
+    e = edges[i]
+    if len(e) >= 3:
+      print(0)
+      sys.exit()
+    count = 0
+    mul = 3
+    for j in e:
+      if j < i:
+        mul -= 1
+    result *= mul
 
-  result = 0
   print(result)
 
 main()
