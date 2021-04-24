@@ -21,7 +21,7 @@ def main():
         s_f[a], s_b[b-n] = s_b[b-n], s_f[a]
       elif a >= n and b < n:
         s_b[a-n], s_f[b] = s_f[b], s_b[a-n]
-      elif a < n and b >= n:
+      elif a >= n and b >= n:
         s_b[a-n], s_b[b-n] = s_b[b-n], s_b[a-n]
     else:
       s_f, s_b = s_b, s_f
