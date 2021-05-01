@@ -10,7 +10,7 @@ if sys.platform =='ios':
 def main():
 	n = list(map(int, input().strip().split()))[0]
 	a = list(map(int, input().strip().split()))
-	if 1 in a:
+	if sum(a) == len(a):
 		print('pairwise coprime')
 		sys.exit()
 
