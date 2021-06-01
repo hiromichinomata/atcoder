@@ -8,8 +8,16 @@ if sys.platform =='ios':
 
 def main():
 	a, b, x, y = list(map(int, input().strip().split()))
-	b -= a
-	result = min(2*x, y) * b
+	d = abs(b-a)
+	result = min(2*x, y) * d
+	if a <= b:
+		result += x
+	else:
+		if 2*x <= y:
+			result -= x
+		else:
+			result +=x-y
+
 	print(result)
 
 main()
