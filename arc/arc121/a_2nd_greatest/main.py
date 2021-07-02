@@ -19,10 +19,10 @@ def main():
 	y_houses  = sorted(houses, key=lambda x: x[1])
 	for i in [0, 1, -2, -1]:
 		candidates.add(y_houses[i][2])
-	candidates = list(candidates)
+	candidates = sorted(list(candidates))
 	result = []
 	for ci in range(len(candidates)-1):
-		for cj in range(i+1, len(candidates)):
+		for cj in range(ci+1, len(candidates)):
 			i = candidates[ci]
 			j = candidates[cj]
 			v = max(abs(houses[i][0]-houses[j][0]), abs(houses[i][1]-houses[j][1]))
@@ -30,3 +30,4 @@ def main():
 	print(sorted(result)[-2])
 
 main()
+
