@@ -17,8 +17,8 @@ def main():
 		lines_0[i] = [a, b]
 		lines_1[i] = [b, a]
 
-	lines_0 = sorted(lines_0)
-	lines_1 = sorted(lines_1)
+	lines_0 = sorted(lines_0, key=lambda x: x[0]+x[1])
+	lines_1 = sorted(lines_1, key=lambda x: x[0]+x[1])
 
 	result_0 = 0
 	x = -1
